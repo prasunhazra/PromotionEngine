@@ -1,21 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PromotionEngine
 {
-    interface ISKU
+    public interface ISKU
     {
         int Cost();
     }
 
-    abstract class PromotionSKU : ISKU
+    public abstract class PromotionSKU : ISKU
     {
-        private List<ISKU> _lSku;
+        protected List<ISKU> _lSku;
         public PromotionSKU(List<ISKU> lsku)
         {
             _lSku = lsku;
         }
-        public abstract int Cost();
+        public virtual int Cost()
+        {
+            return _lSku.FirstOrDefault().Cost();
+        }
+    }
+
+    public class skuA : ISKU
+    {
+        public int Cost()
+        {
+            return 50;
+        }
+    }
+
+    public class skuB : ISKU
+    {
+        public int Cost()
+        {
+            return 30;
+        }
+    }
+
+    public class skuC : ISKU
+    {
+        public int Cost()
+        {
+            return 20;
+        }
+    }
+
+    public class skuD : ISKU
+    {
+        public int Cost()
+        {
+            return 15;
+        }
     }
 }
